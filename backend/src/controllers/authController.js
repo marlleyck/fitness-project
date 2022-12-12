@@ -4,6 +4,7 @@ const User = require('../models/User')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+// Register User Function
 exports.createUser = async (req, res) => {
     const { name, email, password, confirmPassword, exercises } = req.body
 
@@ -60,6 +61,7 @@ exports.createUser = async (req, res) => {
     
 }
 
+// Login User Function
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body
 
@@ -104,6 +106,7 @@ exports.loginUser = async (req, res) => {
 
 }
 
+// Get User Function
 exports.getOneUser = async (req, res) => {
     const { id } = req.tokenDecoded
 
@@ -122,7 +125,7 @@ exports.getOneUser = async (req, res) => {
     return res.status(200).send({ user })
 }
 
-// Function Validate Token
+// Validate Token Function
 exports.validateToken = (req, res, next) => {
     // Take header
     const authHeader = req.headers['authorization']
