@@ -1,5 +1,8 @@
+require('dotenv').config()
+
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 exports.createUser = async (req, res) => {
     const { name, email, password, confirmPassword, exercises } = req.body
@@ -38,6 +41,50 @@ exports.createUser = async (req, res) => {
     return res.status(201).send({ msg: 'User created!', user})
 }
 
+exports.loginUser = async (req, res) => {
+    const { email, password } = req.body
+
+    // Validations
+    if (!email) {
+        return res.status(400).send({ error: 'Email is required!' })
+    }
+
+    if (!password) {
+        return res.status(400).send({ error: 'Password is required!' })
+    }
+
+    const user = await User.findOne({
+        where: {
+            email: email
+        }
+    })
+
+    if (!user) {
+        return res.status(404).send({ error: 'Email is not exists!' })
+    }
+
+    // Check if passwords match
+    const checkPasword = await bcrypt.compare(password, user.password)
+
+    if (!checkPasword) {
+        return res.status(422).send({ error: 'Invalid password!' })
+    }
+
+    // Create token
+    try {
+        const secret = process.env.SECRET
+
+        const token = jwt.sign({
+            id: user.id
+        }, secret)
+
+        return res.status(200).send({ user_id: user.id, token })
+    } catch(e) {
+        return res.status(500).send({ error: 'Server error!' })
+    }
+
+}
+
 exports.getUsers = async (req, res) => {
     const users = await User.findAll()
 
@@ -45,7 +92,7 @@ exports.getUsers = async (req, res) => {
 }
 
 exports.getOneUser = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.tokenDecoded
 
     const user = await User.findOne({
         where: {
@@ -54,4 +101,24 @@ exports.getOneUser = async (req, res) => {
     })
 
     return res.status(200).send({ user })
+}
+
+// Function Validate Token
+exports.validateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+
+    if (!token) {
+        return res.status(401).send({ error: 'Access denied!' })
+    }
+
+    try {
+        const secret = process.env.SECRET
+        const responseToken = jwt.verify(token, secret)
+        req.tokenDecoded = responseToken
+
+        next()
+    } catch(e) {
+        return res.status(400).send({ error: 'Invalid token!' })
+    }
 }
