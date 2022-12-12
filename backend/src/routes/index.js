@@ -10,6 +10,4 @@ Router.post('/auth/user', authController.loginUser)
 
 Router.get('/auth/user', authController.validateToken, authController.getOneUser)
 
-Router.get('/users', authController.getUsers)
-
 module.exports = Router

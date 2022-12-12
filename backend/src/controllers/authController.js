@@ -28,17 +28,36 @@ exports.createUser = async (req, res) => {
         return res.status(400).send({ error: 'Passwords do not match!' })
     }
 
+    // Get user email
+    const userEmail = await User.findOne({
+        where: {
+            email: email
+        }
+    })
+
+    // Check if email exists
+    if (userEmail) {
+        return res.status(400).send({ error: 'Email already exists!' })
+    }
+
+    // Generate salt and hash password
     const salt = await bcrypt.genSalt(12)
     const hashPassword = await bcrypt.hash(password, salt)
 
-    const user = await User.create({
-        name,
-        email,
-        password: hashPassword,
-        exercises
-    })
-
-    return res.status(201).send({ msg: 'User created!', user})
+    // Create user
+    try {
+        const user = await User.create({
+            name,
+            email,
+            password: hashPassword,
+            exercises
+        })
+    
+        return res.status(201).send({ msg: 'User created!', user})
+    } catch(e) {
+        return res.status(500).send({ error: 'Server error!' })
+    }
+    
 }
 
 exports.loginUser = async (req, res) => {
@@ -85,36 +104,41 @@ exports.loginUser = async (req, res) => {
 
 }
 
-exports.getUsers = async (req, res) => {
-    const users = await User.findAll()
-
-    return res.status(200).send({ users })
-}
-
 exports.getOneUser = async (req, res) => {
     const { id } = req.tokenDecoded
 
+    // Get user
     const user = await User.findOne({
         where: {
             id: id
         }
     })
 
+    // Validations
+    if (!user) {
+        return res.status(404).send({ error: 'User not found!' })
+    }
+
     return res.status(200).send({ user })
 }
 
 // Function Validate Token
 exports.validateToken = (req, res, next) => {
+    // Take header
     const authHeader = req.headers['authorization']
+    // Take token
     const token = authHeader && authHeader.split(' ')[1]
 
+    // Validations
     if (!token) {
         return res.status(401).send({ error: 'Access denied!' })
     }
 
+    // Verify token
     try {
         const secret = process.env.SECRET
         const responseToken = jwt.verify(token, secret)
+        // Add token decoded on req
         req.tokenDecoded = responseToken
 
         next()
