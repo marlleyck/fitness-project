@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { api } from '../services/api';
 
 import { AppContextType } from '../@types/AppContextType';
@@ -10,6 +10,8 @@ type AppContextProps = {
 export const AppContext = createContext<AppContextType>({} as AppContextType);
 
 export const AppContextProvider = ({ children }: AppContextProps) => {
+    const [authorized, setAuthorized] = useState<boolean | null>(null);
+
     const [emailLogin, setEmailLogin] = useState('');
     const [passwordLogin, setPasswordLogin] = useState('');
 
@@ -46,6 +48,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
                 confirmPasswordRegister,
                 setConfirmPasswordRegister,
                 handleRegisterUser,
+                authorized,
             }}
         >
             {children}
