@@ -25,7 +25,7 @@ export const LoginForm = () => {
                         </div>
                         <input
                             className="w-4/5 bg-transparent outline-none text-white pl-6 pr-2 py-2 border 
-                            rounded-xl focus:border-purple duration-500"
+                            rounded-xl focus:border-green duration-500"
                             autoComplete="none"
                             type="email"
                             placeholder="Email"
@@ -41,7 +41,7 @@ export const LoginForm = () => {
                         </div>
                         <input
                             className="w-4/5 bg-transparent outline-none text-white pl-6 pr-2 py-2 border 
-                            rounded-xl focus:border-purple duration-500"
+                            rounded-xl focus:border-green duration-500"
                             autoComplete="none"
                             type="password"
                             placeholder="Senha"
