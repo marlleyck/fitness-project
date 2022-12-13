@@ -21,10 +21,6 @@ exports.createUser = async (req, res) => {
         return res.status(400).send({ error: 'Password is required!' })
     }
 
-    if (!exercises) {
-        return res.status(400).send({ error: 'Exercises is required!' })
-    }
-
     if (password !== confirmPassword) {
         return res.status(400).send({ error: 'Passwords do not match!' })
     }
@@ -32,8 +28,8 @@ exports.createUser = async (req, res) => {
     // Get user email
     const userEmail = await User.findOne({
         where: {
-            email: email
-        }
+            email: email,
+        },
     })
 
     // Check if email exists
@@ -51,14 +47,13 @@ exports.createUser = async (req, res) => {
             name,
             email,
             password: hashPassword,
-            exercises
+            exercises: [],
         })
-    
-        return res.status(201).send({ msg: 'User created!', user})
-    } catch(e) {
+
+        return res.status(201).send({ msg: 'User created!', user })
+    } catch (e) {
         return res.status(500).send({ error: 'Server error!' })
     }
-    
 }
 
 // Login User Function
@@ -76,8 +71,8 @@ exports.loginUser = async (req, res) => {
 
     const user = await User.findOne({
         where: {
-            email: email
-        }
+            email: email,
+        },
     })
 
     if (!user) {
@@ -95,15 +90,17 @@ exports.loginUser = async (req, res) => {
     try {
         const secret = process.env.SECRET
 
-        const token = jwt.sign({
-            id: user.id
-        }, secret)
+        const token = jwt.sign(
+            {
+                id: user.id,
+            },
+            secret,
+        )
 
         return res.status(200).send({ user_id: user.id, token })
-    } catch(e) {
+    } catch (e) {
         return res.status(500).send({ error: 'Server error!' })
     }
-
 }
 
 // Get User Function
@@ -113,8 +110,8 @@ exports.getOneUser = async (req, res) => {
     // Get user
     const user = await User.findOne({
         where: {
-            id: id
-        }
+            id: id,
+        },
     })
 
     // Validations
@@ -145,7 +142,7 @@ exports.validateToken = (req, res, next) => {
         req.tokenDecoded = responseToken
 
         next()
-    } catch(e) {
+    } catch (e) {
         return res.status(400).send({ error: 'Invalid token!' })
     }
 }
