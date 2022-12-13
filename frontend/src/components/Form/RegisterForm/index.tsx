@@ -91,7 +91,7 @@ export const RegisterForm = () => {
                             rounded-xl focus:border-purple duration-500"
                             autoComplete="none"
                             type="password"
-                            placeholder="Senha"
+                            placeholder="Confirmar senha"
                             value={confirmPasswordRegister}
                             onChange={(e: any) =>
                                 setConfirmPasswordRegister(e.target.value)
