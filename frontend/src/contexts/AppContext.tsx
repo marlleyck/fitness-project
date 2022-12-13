@@ -1,8 +1,6 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-type AppContextType = {
-
-}
+import { AppContextType } from "../@types/AppContextType";
 
 type AppContextProps = {
     children: JSX.Element
@@ -11,8 +9,11 @@ type AppContextProps = {
 export const AppContext = createContext<AppContextType>({} as AppContextType)
 
 export const AppContextProvider = ({ children }: AppContextProps) => {
+    const [emailLogin, setEmailLogin] = useState('')
+    const [passwordLogin, setPasswordLogin] = useState('')
+
     return (
-        <AppContext.Provider value={{}}>
+        <AppContext.Provider value={{ emailLogin, setEmailLogin, passwordLogin, setPasswordLogin }}>
             {children}
         </AppContext.Provider>
     )
