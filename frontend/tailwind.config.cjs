@@ -4,11 +4,10 @@ module.exports = {
     theme: {
         fontFamily: {
             Open_Sans: ['"Open Sans"'],
+            Montserrat: ['"Montserrat"'],
         },
         extend: {
             colors: {
-                black: '#242424',
-                'black-force': '#1B1B1B',
                 'black-cyan': '#1F2730',
                 purple: '#6B54B7',
                 green: '#269A90',
