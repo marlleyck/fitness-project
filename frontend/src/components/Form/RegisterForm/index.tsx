@@ -20,7 +20,7 @@ export const RegisterForm = () => {
 
     return (
         <div className="w-full h-full flex items-center justify-center">
-            <form className="w-96 h-4/5 bg-black-cyan shadow-4xl rounded-tr-3xl rounded-bl-3xl flex items-center flex-col pt-5">
+            <form className="w-96 h-3/4 bg-black-cyan shadow-4xl rounded-tr-3xl rounded-bl-3xl flex items-center flex-col pt-5">
                 <header className="w-4/5">
                     <h3 className="text-white font-Open_Sans text-4xl font-thin">
                         Sign Up
