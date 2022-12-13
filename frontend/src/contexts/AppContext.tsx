@@ -1,20 +1,54 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
+import { api } from '../services/api';
 
-import { AppContextType } from "../@types/AppContextType";
+import { AppContextType } from '../@types/AppContextType';
 
 type AppContextProps = {
-    children: JSX.Element
-}
+    children: JSX.Element;
+};
 
-export const AppContext = createContext<AppContextType>({} as AppContextType)
+export const AppContext = createContext<AppContextType>({} as AppContextType);
 
 export const AppContextProvider = ({ children }: AppContextProps) => {
-    const [emailLogin, setEmailLogin] = useState('')
-    const [passwordLogin, setPasswordLogin] = useState('')
+    const [emailLogin, setEmailLogin] = useState('');
+    const [passwordLogin, setPasswordLogin] = useState('');
+
+    const [nameRegister, setNameRegister] = useState('');
+    const [emailRegister, setEmailRegister] = useState('');
+    const [passwordRegister, setPasswordRegister] = useState('');
+    const [confirmPasswordRegister, setConfirmPasswordRegister] = useState('');
+
+    const handleRegisterUser = async () => {
+        const user = {
+            name: nameRegister,
+            email: emailRegister,
+            password: passwordRegister,
+            confirmPassword: confirmPasswordRegister,
+        };
+
+        const response = await api.post('/register', user);
+        console.log(response);
+    };
 
     return (
-        <AppContext.Provider value={{ emailLogin, setEmailLogin, passwordLogin, setPasswordLogin }}>
+        <AppContext.Provider
+            value={{
+                emailLogin,
+                setEmailLogin,
+                passwordLogin,
+                setPasswordLogin,
+                nameRegister,
+                setNameRegister,
+                emailRegister,
+                setEmailRegister,
+                passwordRegister,
+                setPasswordRegister,
+                confirmPasswordRegister,
+                setConfirmPasswordRegister,
+                handleRegisterUser,
+            }}
+        >
             {children}
         </AppContext.Provider>
-    )
-} 
+    );
+};
