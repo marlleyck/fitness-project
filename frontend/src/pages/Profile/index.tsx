@@ -1,3 +1,9 @@
+import { ProfileMain } from '../../components/ProfileMain';
+
 export const Profile = () => {
-    return <h1>Profile</h1>;
+    return (
+        <div className="w-screen h-screen bg-black-cyan flex items-center justify-center">
+            <ProfileMain />
+        </div>
+    );
 };
