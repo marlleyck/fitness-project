@@ -1,3 +1,15 @@
+import { RegisterForm } from '../../components/Form/RegisterForm'
+
 export const Register = () => {
-    return <h1>Register</h1>
+    return (
+        <div className="w-screen h-screen bg-black flex items-center justify-start flex-col">
+            <header>
+                <h1 className="text-white font-Open_Sans text-6xl font-thin">
+                    Gym Fitness
+                </h1>
+            </header>
+
+            <RegisterForm />
+        </div>
+    )
 }
