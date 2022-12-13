@@ -4,20 +4,20 @@ const db = require('../database')
 const User = db.define('User', {
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     exercises: {
         type: DataTypes.JSON,
-        allowNull: false
-    }
+        allowNull: true,
+    },
 })
 
 module.exports = User
