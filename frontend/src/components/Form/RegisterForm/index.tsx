@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AppContext } from '../../../contexts/AppContext';
+import { Link } from 'react-router-dom';
 
 import { RiUser3Fill } from 'react-icons/ri';
 import { MdEmail } from 'react-icons/md';
@@ -110,6 +111,14 @@ export const RegisterForm = () => {
                         </button>
                     </div>
                 </main>
+                <footer className="w-full h-full flex items-center justify-center">
+                    <Link
+                        to="/"
+                        className="cursor-pointer brightness-125 text-green texts-base hover:brightness-95 duration-300"
+                    >
+                        Ir para Login
+                    </Link>
+                </footer>
             </form>
         </div>
     );
