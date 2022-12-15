@@ -12,5 +12,6 @@ export type AppContextType = {
     confirmPasswordRegister: string;
     setConfirmPasswordRegister: (newState: string) => void;
     handleRegisterUser: () => void;
+    handleLoginUser: () => void;
     authorized: boolean | null;
 };
