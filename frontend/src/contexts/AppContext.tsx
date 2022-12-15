@@ -103,6 +103,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
                 handleRegisterUser,
                 handleLoginUser,
                 authorized,
+                user,
             }}
         >
             {children}

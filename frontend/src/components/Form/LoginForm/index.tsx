@@ -6,8 +6,13 @@ import { MdEmail } from 'react-icons/md';
 import { IoMdLock } from 'react-icons/io';
 
 export const LoginForm = () => {
-    const { emailLogin, setEmailLogin, passwordLogin, setPasswordLogin } =
-        useContext(AppContext);
+    const {
+        emailLogin,
+        setEmailLogin,
+        passwordLogin,
+        setPasswordLogin,
+        handleLoginUser,
+    } = useContext(AppContext);
 
     return (
         <div className="w-full h-full flex items-center justify-center">
@@ -18,7 +23,7 @@ export const LoginForm = () => {
                     </h3>
                 </header>
                 <main className="w-full h-full flex items-center justify-start flex-col gap-4 mt-16">
-                    {/* ----------- Email input user -------------- */}
+                    {/* ----------- Email - user input -------------- */}
                     <div className="w-full flex items-center justify-center relative">
                         <div className="absolute top-1/2 -translate-y-1/2 left-11">
                             <MdEmail color="#269A90" />
@@ -34,7 +39,7 @@ export const LoginForm = () => {
                         />
                     </div>
 
-                    {/* ----------- Password input user -------------- */}
+                    {/* ----------- Password - user input -------------- */}
                     <div className="w-full flex items-center justify-center relative">
                         <div className="absolute top-1/2 -translate-y-1/2 left-11">
                             <IoMdLock color="#269A90" />
@@ -52,8 +57,10 @@ export const LoginForm = () => {
                         />
                     </div>
 
+                    {/* ----------- User login button -------------- */}
                     <div className="w-full flex items-center justify-center">
                         <button
+                            onClick={handleLoginUser}
                             className="w-4/5 p-3 rounded-xl bg-green text-white hover:brightness-75 duration-500"
                             type="button"
                         >
