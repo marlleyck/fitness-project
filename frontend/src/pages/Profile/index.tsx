@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ProfileMain } from '../../components/ProfileMain';
-import { ProfileHeader } from '../../components/ProfileMain/ProfileHeader';
+import { ProfileHeader } from '../../components/ProfileHeader';
 import { AppContext } from '../../contexts/AppContext';
 
 export const Profile = () => {
