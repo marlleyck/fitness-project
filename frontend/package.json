@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@types/react-icons": "^3.0.0",
+    "@types/react-modal": "^3.13.1",
     "axios": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.4.5"
   },
   "devDependencies": {
