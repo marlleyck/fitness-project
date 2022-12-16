@@ -1,0 +1,49 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Male1",
+            "src": "./src/assets/img/avatars/male1.png"
+        },
+        {
+            "id": 2,
+            "name": "Male2",
+            "src": "./src/assets/img/avatars/male2.png"
+        },
+        {
+            "id": 3,
+            "name": "Male3",
+            "src": "./src/assets/img/avatars/male3.png"
+        },
+        {
+            "id": 4,
+            "name": "Male4",
+            "src": "./src/assets/img/avatars/male4.png"
+        },
+        {
+            "id": 5,
+            "name": "Female1",
+            "src": "./src/assets/img/avatars/female1.png"
+        },
+        {
+            "id": 6,
+            "name": "Female2",
+            "src": "./src/assets/img/avatars/female2.png"
+        },
+        {
+            "id": 7,
+            "name": "Female3",
+            "src": "./src/assets/img/avatars/female3.png"
+        },
+        {
+            "id": 8,
+            "name": "Female4",
+            "src": "./src/assets/img/avatars/female4.png"
+        },
+        {
+            "id": 9,
+            "name": "Female5",
+            "src": "./src/assets/img/avatars/female5.png"
+        }
+    ]
+}
