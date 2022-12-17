@@ -18,6 +18,10 @@ const User = db.define('User', {
         type: DataTypes.JSON,
         allowNull: true,
     },
+    avatar: {
+        type: DataTypes.JSON,
+        allowNull: true,
+    },
 })
 
 module.exports = User
