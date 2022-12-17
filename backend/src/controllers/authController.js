@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 
 // Register User Function
 exports.createUser = async (req, res) => {
-    const { name, email, password, confirmPassword, exercises } = req.body
+    const { name, email, password, confirmPassword } = req.body
 
     // Validations
     if (!name) {
@@ -48,6 +48,7 @@ exports.createUser = async (req, res) => {
             email,
             password: hashPassword,
             exercises: [],
+            avatar: null,
         })
 
         return res.status(201).send({ msg: 'User created!', user })
