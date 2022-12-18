@@ -10,7 +10,7 @@ type Exercise = {
     exercises_day: ExercisesDay[];
 };
 
-export type User = {
+export type UserType = {
     name: string;
     email: string;
     password: string;

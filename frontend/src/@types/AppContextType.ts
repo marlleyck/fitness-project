@@ -1,3 +1,5 @@
+import { UserType } from './UserType';
+
 export type AppContextType = {
     emailLogin: string;
     setEmailLogin: (newState: string) => void;
@@ -14,5 +16,5 @@ export type AppContextType = {
     handleRegisterUser: () => void;
     handleLoginUser: () => void;
     authorized: boolean | null;
-    user: any;
+    user: UserType | undefined;
 };
