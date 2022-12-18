@@ -42,7 +42,7 @@ export const ExerciseForm = () => {
                             <input
                                 type="text"
                                 key={String(index)}
-                                placeholder={`Treino ${item}`}
+                                placeholder={`Treino ${item + 1}`}
                                 className="p-2 rounded-xl outline-none border focus:border-green duration-500"
                             />
                         ))}
