@@ -3,6 +3,7 @@ import { api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 import { AppContextType } from '../@types/AppContextType';
+import { UserType } from '../@types/UserType';
 
 type AppContextProps = {
     children: JSX.Element;
@@ -12,7 +13,7 @@ export const AppContext = createContext<AppContextType>({} as AppContextType);
 
 export const AppContextProvider = ({ children }: AppContextProps) => {
     const [authorized, setAuthorized] = useState<boolean | null>(null);
-    const [user, setUser] = useState<any>();
+    const [user, setUser] = useState<UserType>();
 
     const [emailLogin, setEmailLogin] = useState('');
     const [passwordLogin, setPasswordLogin] = useState('');
