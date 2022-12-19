@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../contexts/AppContext';
+import { api } from '../../services/api';
 import axios from 'axios';
 
 import { AvatarJsonType } from '../../@types/AvatarJsonType';
@@ -12,7 +13,7 @@ import male1 from '../../assets/img/avatars/male1.png';
 Modal.setAppElement('#root');
 
 export const ProfileHeader = () => {
-    const { user } = useContext(AppContext);
+    const { user, token } = useContext(AppContext);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [avatars, setAvatars] = useState<AvatarJsonType>();
@@ -26,14 +27,40 @@ export const ProfileHeader = () => {
         setModalIsOpen(false);
     };
 
-    const handleChooseAvatar = (e: any) => {
+    const handleChooseAvatar = async (e: any) => {
         const avatarID = e.target.id;
-        avatars!.data.map(avatar => {
+
+        /* avatars!.data.map(avatar => {
             if (avatar.id == avatarID) {
                 setAvatar(avatar.src);
-                closeModal();
             }
-        });
+        }); */
+
+        let avatarAux: any;
+        for (let i = 0; i < avatars!.data.length; i++) {
+            if (avatars!.data[i].id == avatarID) {
+                avatarAux = avatars!.data[i].src;
+            }
+        }
+
+        setAvatar(avatarAux);
+        user!.avatar = {
+            id: avatarID,
+            src: avatar,
+        };
+
+        const response = await api.put(
+            '/auth/user',
+            {
+                user: user,
+            },
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            },
+        );
+        closeModal();
     };
 
     useEffect(() => {
@@ -44,6 +71,10 @@ export const ProfileHeader = () => {
                 },
             });
             setAvatars(response.data);
+
+            if (user?.avatar) {
+                setAvatar(`../../../${user.avatar.src}`);
+            }
         };
         fetchAvatars();
     }, []);
@@ -92,13 +123,13 @@ export const ProfileHeader = () => {
                     </div>
                     <div className="w-full flex items-center flex-col">
                         <h3 className="text-white text-2xl font-Montserrat font-light italic capitalize">
-                            {user.name}
+                            {user!.name}
                         </h3>
                         <p className="text-white font-Open_Sans font-thin">
-                            {user.email}
+                            {user!.email}
                         </p>
                         <p className="text-white font-Open_Sans font-thin">
-                            Treinos - {user.exercises.length}
+                            Treinos - {user!.exercises.length}
                         </p>
                     </div>
                 </div>

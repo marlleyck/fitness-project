@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { ExerciseForm } from '../ExerciseForm';
+import { ExerciseForm } from '../Form/ExerciseForm';
 
 import Modal from 'react-modal';
 import { AiFillCloseCircle } from 'react-icons/ai';

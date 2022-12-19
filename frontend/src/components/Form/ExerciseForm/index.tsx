@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../contexts/AppContext';
-import { api } from '../../services/api';
+import { AppContext } from '../../../contexts/AppContext';
+import { api } from '../../../services/api';
 
 import { BsFillPatchPlusFill } from 'react-icons/bs';
 
@@ -37,9 +37,6 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
     };
 
     const handleAddExercise = async () => {
-        /* console.log(inputs);
-        console.log(user); */
-
         if (exerciseTitle === '' || exerciseDay === '') {
             alert('Preencha todos os campos!');
             return;
