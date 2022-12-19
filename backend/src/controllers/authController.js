@@ -125,7 +125,6 @@ exports.getOneUser = async (req, res) => {
 
 // Update User Function
 exports.updateUser = async (req, res) => {
-    // const { id } = req.tokenDecoded
     const { user } = req.body
 
     // Validation

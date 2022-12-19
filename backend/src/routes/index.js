@@ -15,6 +15,10 @@ Router.get(
     authController.getOneUser,
 )
 
-Router.put('/auth/user', authController.updateUser)
+Router.put(
+    '/auth/user',
+    authController.validateToken,
+    authController.updateUser,
+)
 
 module.exports = Router
