@@ -34,7 +34,7 @@ export const ProfileMain = () => {
                             onClick={closeModal}
                         />
                     </header>
-                    <ExerciseForm />
+                    <ExerciseForm closeModal={closeModal} />
                 </div>
             </Modal>
 
