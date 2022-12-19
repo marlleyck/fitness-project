@@ -14,6 +14,7 @@ export const AppContext = createContext<AppContextType>({} as AppContextType);
 export const AppContextProvider = ({ children }: AppContextProps) => {
     const [authorized, setAuthorized] = useState<boolean | null>(null);
     const [user, setUser] = useState<UserType>();
+    const [token, setToken] = useState('');
 
     const [emailLogin, setEmailLogin] = useState('');
     const [passwordLogin, setPasswordLogin] = useState('');
@@ -67,7 +68,6 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
             const tokenStorage =
                 JSON.parse(localStorage.getItem('@gymfit:token') || '[]') ?? [];
 
-            console.log(tokenStorage);
             if (typeof tokenStorage === 'string') {
                 const response = await api.get('/auth/user', {
                     headers: {
@@ -78,6 +78,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
                 setAuthorized(true);
                 setUser(response.data.user);
                 navigate('/profile');
+                setToken(tokenStorage);
             } else {
                 setAuthorized(false);
             }
@@ -105,6 +106,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
                 handleLoginUser,
                 authorized,
                 user,
+                token,
             }}
         >
             {children}

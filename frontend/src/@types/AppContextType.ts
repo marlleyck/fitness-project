@@ -17,4 +17,5 @@ export type AppContextType = {
     handleLoginUser: () => void;
     authorized: boolean | null;
     user: UserType | undefined;
+    token: string;
 };
