@@ -57,15 +57,23 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
             ];
         }
 
-        const response = await api.put('/auth/user', {
-            user: user,
-        });
+        const response = await api.put(
+            '/auth/user',
+            {
+                user: user,
+            },
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            },
+        );
 
-        // setInputs(['', '']);
         setExerciseTitle('');
         setExerciseDay('');
         closeModal();
-        console.log(response);
+
+        console.log(response.data);
     };
 
     return (
