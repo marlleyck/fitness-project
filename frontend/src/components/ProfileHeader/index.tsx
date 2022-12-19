@@ -29,24 +29,24 @@ export const ProfileHeader = () => {
 
     const handleChooseAvatar = async (e: any) => {
         const avatarID = e.target.id;
+        let avatarAux = '';
 
-        /* avatars!.data.map(avatar => {
+        avatars!.data.map(avatar => {
             if (avatar.id == avatarID) {
-                setAvatar(avatar.src);
+                avatarAux = avatar.src;
             }
-        }); */
+        });
 
-        let avatarAux: any;
-        for (let i = 0; i < avatars!.data.length; i++) {
+        /* for (let i = 0; i < avatars!.data.length; i++) {
             if (avatars!.data[i].id == avatarID) {
                 avatarAux = avatars!.data[i].src;
             }
-        }
+        } */
 
         setAvatar(avatarAux);
         user!.avatar = {
             id: avatarID,
-            src: avatar,
+            src: avatarAux,
         };
 
         const response = await api.put(
@@ -60,6 +60,7 @@ export const ProfileHeader = () => {
                 },
             },
         );
+
         closeModal();
     };
 
