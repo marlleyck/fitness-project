@@ -1,13 +1,9 @@
 import { AvatarType } from './AvatarType';
 
-type ExercisesDay = {
-    ['key']: string;
-};
-
-type Exercise = {
+export type Exercise = {
     title: string;
     day: string;
-    exercises_day: ExercisesDay[];
+    exercises_day: string[];
 };
 
 export type UserType = {
