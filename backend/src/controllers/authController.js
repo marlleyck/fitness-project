@@ -123,6 +123,32 @@ exports.getOneUser = async (req, res) => {
     return res.status(200).send({ user })
 }
 
+// Update User Function
+exports.updateUser = async (req, res) => {
+    // const { id } = req.tokenDecoded
+    const { user } = req.body
+
+    // Validation
+    if (!user) {
+        return res.status(400).send({ error: 'User is required!' })
+    }
+
+    // Update user
+    await User.update(user, {
+        where: {
+            email: user.email,
+        },
+    })
+
+    const updatedUser = await User.findOne({
+        where: {
+            email: user.email,
+        },
+    })
+
+    return res.status(200).send({ updatedUser })
+}
+
 // Validate Token Function
 exports.validateToken = (req, res, next) => {
     // Take header
