@@ -1,5 +1,3 @@
-import { UserType } from './UserType';
-
 export type AppContextType = {
     emailLogin: string;
     setEmailLogin: (newState: string) => void;
@@ -15,14 +13,11 @@ export type AppContextType = {
     setConfirmPasswordRegister: (newState: string) => void;
     handleRegisterUser: () => void;
     handleLoginUser: () => void;
-    authorized: boolean | null;
-    user: UserType | undefined;
-    token: string;
-    handleModalFillFields: (title: string, openModal: any) => void;
-    inputs: any;
-    setInputs: any;
-    exerciseTitle: any;
-    setExerciseTitle: any;
-    exerciseDay: any;
-    setExerciseDay: any;
+    handleModalFillFields: (title: string, openModal: () => void) => void;
+    inputs: string[];
+    setInputs: (newState: string[]) => void;
+    exerciseTitle: string;
+    setExerciseTitle: (newState: string) => void;
+    exerciseDay: string;
+    setExerciseDay: (newState: string) => void;
 };

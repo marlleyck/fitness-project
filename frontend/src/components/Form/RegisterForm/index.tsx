@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AppContext } from '../../../contexts/AppContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
 import { RiUser3Fill } from 'react-icons/ri';
@@ -17,8 +18,9 @@ export const RegisterForm = () => {
         confirmPasswordRegister,
         setConfirmPasswordRegister,
         handleRegisterUser,
-        authorized,
     } = useContext(AppContext);
+
+    const { authorized } = useContext(AuthContext);
 
     return (
         <div className="w-full h-full flex items-center justify-center">
@@ -43,9 +45,9 @@ export const RegisterForm = () => {
                                     type="text"
                                     placeholder="Nome"
                                     value={nameRegister}
-                                    onChange={(e: any) =>
-                                        setNameRegister(e.target.value)
-                                    }
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>,
+                                    ) => setNameRegister(e.target.value)}
                                 />
                             </div>
 
@@ -61,9 +63,9 @@ export const RegisterForm = () => {
                                     type="email"
                                     placeholder="Email"
                                     value={emailRegister}
-                                    onChange={(e: any) =>
-                                        setEmailRegister(e.target.value)
-                                    }
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>,
+                                    ) => setEmailRegister(e.target.value)}
                                 />
                             </div>
 
@@ -79,9 +81,9 @@ export const RegisterForm = () => {
                                     type="password"
                                     placeholder="Senha"
                                     value={passwordRegister}
-                                    onChange={(e: any) =>
-                                        setPasswordRegister(e.target.value)
-                                    }
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>,
+                                    ) => setPasswordRegister(e.target.value)}
                                 />
                             </div>
 
@@ -97,7 +99,9 @@ export const RegisterForm = () => {
                                     type="password"
                                     placeholder="Confirmar senha"
                                     value={confirmPasswordRegister}
-                                    onChange={(e: any) =>
+                                    onChange={(
+                                        e: React.ChangeEvent<HTMLInputElement>,
+                                    ) =>
                                         setConfirmPasswordRegister(
                                             e.target.value,
                                         )

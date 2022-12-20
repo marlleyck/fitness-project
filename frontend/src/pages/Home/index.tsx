@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import { AppContext } from '../../contexts/AppContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import { LoginForm } from '../../components/Form/LoginForm';
 
 export const Home = () => {
-    const { authorized } = useContext(AppContext);
+    const { authorized } = useContext(AuthContext);
     return (
         <div className="w-screen h-screen bg-black-cyan flex items-center justify-center">
             {authorized !== null && !authorized && (

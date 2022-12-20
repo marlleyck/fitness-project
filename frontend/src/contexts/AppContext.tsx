@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
+import { AuthContext } from './AuthContext';
 import { api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,10 +13,6 @@ type AppContextProps = {
 export const AppContext = createContext<AppContextType>({} as AppContextType);
 
 export const AppContextProvider = ({ children }: AppContextProps) => {
-    const [authorized, setAuthorized] = useState<boolean | null>(null);
-    const [user, setUser] = useState<UserType>();
-    const [token, setToken] = useState('');
-
     const [emailLogin, setEmailLogin] = useState('');
     const [passwordLogin, setPasswordLogin] = useState('');
 
@@ -23,11 +20,14 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
     const [emailRegister, setEmailRegister] = useState('');
     const [passwordRegister, setPasswordRegister] = useState('');
     const [confirmPasswordRegister, setConfirmPasswordRegister] = useState('');
-    const navigate = useNavigate();
 
     const [inputs, setInputs] = useState(['', '']);
     const [exerciseTitle, setExerciseTitle] = useState('');
     const [exerciseDay, setExerciseDay] = useState('');
+
+    const { user, setUser, setAuthorized } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const handleRegisterUser = async () => {
         const userRegister = {
@@ -67,7 +67,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
         }
     };
 
-    const handleModalFillFields = (title: string, openModal: any) => {
+    const handleModalFillFields = (title: string, openModal: () => void) => {
         user!.exercises.map(exercise => {
             if (exercise.title === title) {
                 if (user!.exercises.length !== 0) {
@@ -84,30 +84,6 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
             }
         });
     };
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            const tokenStorage =
-                JSON.parse(localStorage.getItem('@gymfit:token') || '[]') ?? [];
-
-            if (typeof tokenStorage === 'string') {
-                const response = await api.get('/auth/user', {
-                    headers: {
-                        authorization: `Bearer ${tokenStorage}`,
-                    },
-                });
-
-                setAuthorized(true);
-                setUser(response.data.user);
-                navigate('/profile');
-                setToken(tokenStorage);
-            } else {
-                setAuthorized(false);
-            }
-        };
-
-        fetchUser();
-    }, []);
 
     return (
         <AppContext.Provider
@@ -126,9 +102,6 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
                 setConfirmPasswordRegister,
                 handleRegisterUser,
                 handleLoginUser,
-                authorized,
-                user,
-                token,
                 handleModalFillFields,
                 inputs,
                 setInputs,

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AppContext } from '../../contexts/AppContext';
 
 import { ExerciseForm } from '../Form/ExerciseForm';
 import { UserExercises } from '../UserExercises';
@@ -9,11 +10,17 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 export const ProfileMain = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
+    const { setExerciseTitle, setExerciseDay, setInputs } =
+        useContext(AppContext);
+
     const openModal = () => {
         setModalIsOpen(true);
     };
 
     const closeModal = () => {
+        setExerciseDay('');
+        setExerciseTitle('');
+        setInputs(['', '']);
         setModalIsOpen(false);
     };
 

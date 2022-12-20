@@ -1,5 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { AppContext } from '../../../contexts/AppContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 import { api } from '../../../services/api';
 
 import { BsFillPatchPlusFill } from 'react-icons/bs';
@@ -10,8 +11,6 @@ type ExerciseFormProps = {
 
 export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
     const {
-        user,
-        token,
         inputs,
         setInputs,
         exerciseTitle,
@@ -20,11 +19,16 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
         setExerciseDay,
     } = useContext(AppContext);
 
+    const { token, user } = useContext(AuthContext);
+
     const addExerciseInput = () => {
         setInputs([...inputs, '']);
     };
 
-    const handleChangeExerciseInput = (e: any, index: number) => {
+    const handleChangeExerciseInput = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        index: number,
+    ) => {
         inputs[index] = e.target.value;
         setInputs([...inputs]);
     };
@@ -72,28 +76,32 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
                         type="text"
                         placeholder="Titulo"
                         value={exerciseTitle}
-                        onChange={(e: any) => setExerciseTitle(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setExerciseTitle(e.target.value)
+                        }
                         className="p-2 rounded-xl outline-none border focus:border-green duration-500"
                     />
                     <input
                         type="text"
                         placeholder="Dia"
                         value={exerciseDay}
-                        onChange={(e: any) => setExerciseDay(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setExerciseDay(e.target.value)
+                        }
                         className="p-2 rounded-xl outline-none border focus:border-green duration-500"
                     />
                 </div>
                 <div className="w-full flex items-center justify-center gap-4">
                     <div className="w-full grid items-center justify-center grid-cols-2 gap-4 px-4">
-                        {inputs.map((item: any, index: any) => (
+                        {inputs.map((item: string, index: number) => (
                             <input
                                 type="text"
                                 key={String(index)}
                                 placeholder={`Treino ${index + 1}`}
                                 value={item}
-                                onChange={(e: any) =>
-                                    handleChangeExerciseInput(e, index)
-                                }
+                                onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>,
+                                ) => handleChangeExerciseInput(e, index)}
                                 className="p-2 rounded-xl outline-none border focus:border-green duration-500"
                             />
                         ))}

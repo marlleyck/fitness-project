@@ -1,10 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+
 import { ProfileMain } from '../../components/ProfileMain';
 import { ProfileHeader } from '../../components/ProfileHeader';
-import { AppContext } from '../../contexts/AppContext';
 
 export const Profile = () => {
-    const { user } = useContext(AppContext);
+    const { user, setToken } = useContext(AuthContext);
+
+    useEffect(() => {
+        const tokenStorage =
+            JSON.parse(localStorage.getItem('@gymfit:token') || '[]') ?? [];
+
+        setToken(tokenStorage);
+    }, []);
+
     return (
         <>
             {user && (

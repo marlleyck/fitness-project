@@ -35,7 +35,9 @@ export const LoginForm = () => {
                             type="email"
                             placeholder="Email"
                             value={emailLogin}
-                            onChange={(e: any) => setEmailLogin(e.target.value)}
+                            onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>,
+                            ) => setEmailLogin(e.target.value)}
                         />
                     </div>
 
@@ -51,9 +53,9 @@ export const LoginForm = () => {
                             type="password"
                             placeholder="Senha"
                             value={passwordLogin}
-                            onChange={(e: any) =>
-                                setPasswordLogin(e.target.value)
-                            }
+                            onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>,
+                            ) => setPasswordLogin(e.target.value)}
                         />
                     </div>
 

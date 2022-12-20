@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { AppContext } from '../../contexts/AppContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import { api } from '../../services/api';
 import axios from 'axios';
 
@@ -13,7 +13,7 @@ import male1 from '../../assets/img/avatars/male1.png';
 Modal.setAppElement('#root');
 
 export const ProfileHeader = () => {
-    const { user, token } = useContext(AppContext);
+    const { token, user } = useContext(AuthContext);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [avatars, setAvatars] = useState<AvatarJsonType>();
@@ -60,7 +60,6 @@ export const ProfileHeader = () => {
                 },
             },
         );
-
         closeModal();
     };
 
