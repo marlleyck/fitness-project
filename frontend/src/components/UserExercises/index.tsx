@@ -8,16 +8,22 @@ type UserExercisesProps = {
 };
 
 export const UserExercises = ({ openModal }: UserExercisesProps) => {
-    const { user } = useContext(AuthContext);
+    const { isArrived, user } = useContext(AuthContext);
+
     return (
         <div className="w-full grid grid-cols-3 gap-4">
-            {user!.exercises.map((exercise, index) => (
-                <UserExerciseCard
-                    key={index}
-                    title={exercise.title}
-                    openModal={openModal}
-                />
-            ))}
+            {isArrived && (
+                <>
+                    {user!.exercises!.map(exercise => (
+                        <UserExerciseCard
+                            key={exercise.id}
+                            title={exercise.title}
+                            openModal={openModal}
+                            position={exercise.id}
+                        />
+                    ))}
+                </>
+            )}
         </div>
     );
 };

@@ -1,10 +1,10 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
 import { AppContextType } from '../@types/AppContextType';
-import { UserType } from '../@types/UserType';
+import { Exercise } from '../@types/UserType';
 
 type AppContextProps = {
     children: JSX.Element;
@@ -25,7 +25,8 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
     const [exerciseTitle, setExerciseTitle] = useState('');
     const [exerciseDay, setExerciseDay] = useState('');
 
-    const { user, setUser, setAuthorized } = useContext(AuthContext);
+    const { user, setUser, setAuthorized, isArrived, token } =
+        useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -37,8 +38,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
             confirmPassword: confirmPasswordRegister,
         };
 
-        const response = await api.post('/register', userRegister);
-        console.log(response);
+        await api.post('/register', userRegister);
     };
 
     const handleLoginUser = async () => {
@@ -67,10 +67,36 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
         }
     };
 
+    const handleDeleteExercise = async (position: number) => {
+        let filteredExercises: Exercise[] = user!.exercises!;
+
+        let newList = filteredExercises.filter(exercise => {
+            if (exercise.id !== position) {
+                return exercise;
+            }
+        });
+
+        let newUser = { ...user, exercises: newList };
+
+        const response = await api.put(
+            '/auth/user',
+            {
+                user: newUser,
+            },
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            },
+        );
+
+        setUser(response.data.updatedUser);
+    };
+
     const handleModalFillFields = (title: string, openModal: () => void) => {
-        user!.exercises.map(exercise => {
+        user!.exercises!.map(exercise => {
             if (exercise.title === title) {
-                if (user!.exercises.length !== 0) {
+                if (user!.exercises!.length !== 0) {
                     let inputsArr: string[] = [];
                     exercise.exercises_day.forEach(exerciseDay => {
                         inputsArr.push(exerciseDay);
@@ -109,6 +135,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
                 setExerciseTitle,
                 exerciseDay,
                 setExerciseDay,
+                handleDeleteExercise,
             }}
         >
             {children}

@@ -18,6 +18,8 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
 
     const [token, setToken] = useState('');
     const [authorized, setAuthorized] = useState<boolean | null>(null);
+
+    const [isArrived, setIsArrived] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,6 +37,7 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
                 setUser(response.data.user);
                 navigate('/profile');
                 setToken(tokenStorage);
+                setIsArrived(true);
             } else {
                 setAuthorized(false);
             }
@@ -52,6 +55,7 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
                 setToken,
                 user,
                 setUser,
+                isArrived,
             }}
         >
             {children}

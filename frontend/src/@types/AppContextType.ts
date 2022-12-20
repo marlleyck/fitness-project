@@ -1,3 +1,5 @@
+import { Exercise } from './UserType';
+
 export type AppContextType = {
     emailLogin: string;
     setEmailLogin: (newState: string) => void;
@@ -20,4 +22,5 @@ export type AppContextType = {
     setExerciseTitle: (newState: string) => void;
     exerciseDay: string;
     setExerciseDay: (newState: string) => void;
+    handleDeleteExercise: (position: number) => void;
 };

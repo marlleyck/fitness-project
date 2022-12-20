@@ -7,4 +7,5 @@ export type AuthContextType = {
     setToken: (newState: string) => void;
     user: UserType | undefined;
     setUser: (newState: UserType) => void;
+    isArrived: boolean;
 };

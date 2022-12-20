@@ -42,8 +42,9 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
         const exercises = inputs;
         if (user) {
             user.exercises = [
-                ...user.exercises,
+                ...user.exercises!,
                 {
+                    id: user.exercises!.length + 1,
                     title: exerciseTitle,
                     day: exerciseDay,
                     exercises_day: exercises,
@@ -51,7 +52,7 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
             ];
         }
 
-        const response = await api.put(
+        await api.put(
             '/auth/user',
             {
                 user: user,
