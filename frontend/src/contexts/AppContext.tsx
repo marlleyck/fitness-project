@@ -76,7 +76,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
             }
         });
 
-        let newUser = { ...user, exercises: filteredExercises };
+        const newUser = { ...user, exercises: filteredExercises };
 
         const response = await api.put(
             '/auth/user',
