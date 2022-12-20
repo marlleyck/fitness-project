@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { ExerciseForm } from '../Form/ExerciseForm';
+import { UserExercises } from '../UserExercises';
 
 import Modal from 'react-modal';
 import { AiFillCloseCircle } from 'react-icons/ai';
@@ -48,6 +49,8 @@ export const ProfileMain = () => {
                         Novo treino
                     </button>
                 </div>
+
+                <UserExercises openModal={openModal} />
             </div>
         </div>
     );

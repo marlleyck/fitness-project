@@ -25,6 +25,10 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
     const [confirmPasswordRegister, setConfirmPasswordRegister] = useState('');
     const navigate = useNavigate();
 
+    const [inputs, setInputs] = useState(['', '']);
+    const [exerciseTitle, setExerciseTitle] = useState('');
+    const [exerciseDay, setExerciseDay] = useState('');
+
     const handleRegisterUser = async () => {
         const userRegister = {
             name: nameRegister,
@@ -61,6 +65,24 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
         } catch (e) {
             console.log(e);
         }
+    };
+
+    const handleModalFillFields = (title: string, openModal: any) => {
+        user!.exercises.map(exercise => {
+            if (exercise.title === title) {
+                if (user!.exercises.length !== 0) {
+                    let inputsArr: string[] = [];
+                    exercise.exercises_day.forEach(exerciseDay => {
+                        inputsArr.push(exerciseDay);
+                    });
+
+                    setInputs(inputsArr);
+                    setExerciseTitle(exercise.title);
+                    setExerciseDay(exercise.day);
+                    openModal();
+                }
+            }
+        });
     };
 
     useEffect(() => {
@@ -107,6 +129,13 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
                 authorized,
                 user,
                 token,
+                handleModalFillFields,
+                inputs,
+                setInputs,
+                exerciseTitle,
+                setExerciseTitle,
+                exerciseDay,
+                setExerciseDay,
             }}
         >
             {children}

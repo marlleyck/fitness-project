@@ -18,4 +18,11 @@ export type AppContextType = {
     authorized: boolean | null;
     user: UserType | undefined;
     token: string;
+    handleModalFillFields: (title: string, openModal: any) => void;
+    inputs: any;
+    setInputs: any;
+    exerciseTitle: any;
+    setExerciseTitle: any;
+    exerciseDay: any;
+    setExerciseDay: any;
 };

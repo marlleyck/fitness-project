@@ -9,23 +9,16 @@ type ExerciseFormProps = {
 };
 
 export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
-    const { user, token } = useContext(AppContext);
-
-    const [inputs, setInputs] = useState(['', '']);
-    const [exerciseTitle, setExerciseTitle] = useState('');
-    const [exerciseDay, setExerciseDay] = useState('');
-
-    /* useEffect(() => {
-        if (user) {
-            if (user.exercises.length !== 0) {
-                let inputsArr = [];
-                for (let i = 1; i <= user.exercises.length; i++) {
-                    inputsArr.push('');
-                }
-                setInputs(inputsArr);
-            }
-        }
-    }, []); */
+    const {
+        user,
+        token,
+        inputs,
+        setInputs,
+        exerciseTitle,
+        setExerciseTitle,
+        exerciseDay,
+        setExerciseDay,
+    } = useContext(AppContext);
 
     const addExerciseInput = () => {
         setInputs([...inputs, '']);
@@ -69,8 +62,6 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
         setExerciseTitle('');
         setExerciseDay('');
         closeModal();
-
-        console.log(response.data);
     };
 
     return (
@@ -94,7 +85,7 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
                 </div>
                 <div className="w-full flex items-center justify-center gap-4">
                     <div className="w-full grid items-center justify-center grid-cols-2 gap-4 px-4">
-                        {inputs.map((item, index) => (
+                        {inputs.map((item: any, index: any) => (
                             <input
                                 type="text"
                                 key={String(index)}
