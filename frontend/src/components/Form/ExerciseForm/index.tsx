@@ -19,7 +19,7 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
         setExerciseDay,
     } = useContext(AppContext);
 
-    const { token, user } = useContext(AuthContext);
+    const { token, user, setUser } = useContext(AuthContext);
 
     const addExerciseInput = () => {
         setInputs([...inputs, '']);
@@ -52,7 +52,7 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
             ];
         }
 
-        await api.put(
+        const response = await api.put(
             '/auth/user',
             {
                 user: user,
@@ -63,7 +63,7 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
                 },
             },
         );
-
+        setUser(response.data.updatedUser);
         setExerciseTitle('');
         setExerciseDay('');
         closeModal();

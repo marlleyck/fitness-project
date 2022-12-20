@@ -68,15 +68,15 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
     };
 
     const handleDeleteExercise = async (position: number) => {
-        let filteredExercises: Exercise[] = user!.exercises!;
+        const userExercises: Exercise[] = user!.exercises!;
 
-        let newList = filteredExercises.filter(exercise => {
+        let filteredExercises = userExercises.filter(exercise => {
             if (exercise.id !== position) {
                 return exercise;
             }
         });
 
-        let newUser = { ...user, exercises: newList };
+        let newUser = { ...user, exercises: filteredExercises };
 
         const response = await api.put(
             '/auth/user',
