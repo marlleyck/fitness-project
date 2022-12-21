@@ -25,8 +25,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
     const [exerciseTitle, setExerciseTitle] = useState('');
     const [exerciseDay, setExerciseDay] = useState('');
 
-    const { user, setUser, setAuthorized, isArrived, token } =
-        useContext(AuthContext);
+    const { user, setUser, setAuthorized, token } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -93,9 +92,9 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
         setUser(response.data.updatedUser);
     };
 
-    const handleModalFillFields = (title: string, openModal: () => void) => {
+    const handleModalFillFields = (id: number, openModal: () => void) => {
         user!.exercises!.map(exercise => {
-            if (exercise.title === title) {
+            if (exercise.id === id) {
                 if (user!.exercises!.length !== 0) {
                     let inputsArr: string[] = [];
                     exercise.exercises_day.forEach(exerciseDay => {

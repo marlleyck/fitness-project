@@ -4,15 +4,19 @@ import { AppContext } from '../../../contexts/AppContext';
 import { IoMdTrash } from 'react-icons/io';
 
 type UserExerciseCardProps = {
+    id: number;
     title: string;
-    openModal: () => void;
+    day: string;
     position: number;
+    openModal: () => void;
 };
 
 export const UserExerciseCard = ({
+    id,
     title,
-    openModal,
+    day,
     position,
+    openModal,
 }: UserExerciseCardProps) => {
     const { handleModalFillFields, handleDeleteExercise } =
         useContext(AppContext);
@@ -26,9 +30,11 @@ export const UserExerciseCard = ({
         >
             <div
                 className="w-full h-full flex items-center justify-center"
-                onClick={() => handleModalFillFields(title, openModal)}
+                onClick={() => handleModalFillFields(id, openModal)}
             >
-                <h3 className="text-white font-['Montserrat']">{title}</h3>
+                <h3 className="text-white font-['Montserrat']">
+                    {title} - {day}
+                </h3>
             </div>
             <div className="cursor-pointer ">
                 <IoMdTrash

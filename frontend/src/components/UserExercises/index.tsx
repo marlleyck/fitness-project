@@ -17,9 +17,11 @@ export const UserExercises = ({ openModal }: UserExercisesProps) => {
                     {user!.exercises!.map(exercise => (
                         <UserExerciseCard
                             key={exercise.id}
+                            id={exercise.id}
                             title={exercise.title}
-                            openModal={openModal}
+                            day={exercise.day}
                             position={exercise.id}
+                            openModal={openModal}
                         />
                     ))}
                 </>
