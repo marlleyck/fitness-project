@@ -8,4 +8,5 @@ export type AuthContextType = {
     user: UserType | undefined;
     setUser: (newState: UserType) => void;
     isArrived: boolean;
+    setIsArrived: (newState: boolean) => void;
 };

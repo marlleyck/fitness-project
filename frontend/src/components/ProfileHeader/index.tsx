@@ -108,7 +108,7 @@ export const ProfileHeader = () => {
             </Modal>
 
             <header className="w-full h-full border-b-4 pb-4 border-solid border-black">
-                {isArrived && avatar && (
+                {isArrived && (
                     <>
                         <div className="w-full h-full flex items-center justify-center flex-col p-4 relative">
                             <div className="w-36 flex items-center justify-center absolute top-0 right-0 mr-4 mt-4">
@@ -123,7 +123,7 @@ export const ProfileHeader = () => {
                             <div className="flex items-center justify-center">
                                 <img
                                     className="w-24 h-24 cursor-pointer hover:brightness-75 duration-200"
-                                    src={avatar}
+                                    src={avatar || male1}
                                     onClick={openModal}
                                 />
                             </div>

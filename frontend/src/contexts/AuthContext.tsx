@@ -56,6 +56,7 @@ export const AuthContextProvider = ({ children }: AuthContextProps) => {
                 user,
                 setUser,
                 isArrived,
+                setIsArrived,
             }}
         >
             {children}

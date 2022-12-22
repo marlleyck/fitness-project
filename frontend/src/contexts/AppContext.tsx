@@ -25,7 +25,8 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
     const [exerciseTitle, setExerciseTitle] = useState('');
     const [exerciseDay, setExerciseDay] = useState('');
 
-    const { user, setUser, setAuthorized, token } = useContext(AuthContext);
+    const { user, setUser, setAuthorized, setIsArrived, token } =
+        useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -37,7 +38,8 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
             confirmPassword: confirmPasswordRegister,
         };
 
-        await api.post('/register', userRegister);
+        const response = await api.post('/register', userRegister);
+        console.log(response);
     };
 
     const handleLoginUser = async () => {
@@ -60,6 +62,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
 
             setUser(response.data.user);
             setAuthorized(true);
+            setIsArrived(true);
             navigate('/profile');
         } catch (e) {
             console.log(e);
