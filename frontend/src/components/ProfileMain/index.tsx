@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
 import { AppContext } from '../../contexts/AppContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import { ExerciseForm } from '../Form/ExerciseForm';
 import { UserExercises } from '../UserExercises';
 
 import Modal from 'react-modal';
+import ReactLoading from 'react-loading';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 export const ProfileMain = () => {
@@ -12,6 +14,8 @@ export const ProfileMain = () => {
 
     const { setExerciseTitle, setExerciseDay, setInputs } =
         useContext(AppContext);
+
+    const { isArrived } = useContext(AuthContext);
 
     const openModal = () => {
         setModalIsOpen(true);
@@ -57,7 +61,11 @@ export const ProfileMain = () => {
                     </button>
                 </div>
 
-                <UserExercises openModal={openModal} />
+                {isArrived ? (
+                    <UserExercises openModal={openModal} />
+                ) : (
+                    <ReactLoading type="spin" />
+                )}
             </div>
         </div>
     );

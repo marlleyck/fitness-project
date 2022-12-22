@@ -38,8 +38,14 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
             confirmPassword: confirmPasswordRegister,
         };
 
-        const response = await api.post('/register', userRegister);
-        console.log(response);
+        await api.post('/register', userRegister);
+
+        navigate('/');
+
+        setNameRegister('');
+        setEmailRegister('');
+        setPasswordRegister('');
+        setConfirmPasswordRegister('');
     };
 
     const handleLoginUser = async () => {
@@ -64,6 +70,9 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
             setAuthorized(true);
             setIsArrived(true);
             navigate('/profile');
+
+            setEmailLogin('');
+            setPasswordLogin('');
         } catch (e) {
             console.log(e);
         }

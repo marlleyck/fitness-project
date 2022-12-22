@@ -68,7 +68,6 @@ export const ProfileHeader = () => {
                 },
             });
             setAvatars(response.data);
-            console.log(response.data);
 
             if (user!.avatar) {
                 setAvatar(`../../../${user!.avatar.src}`);
@@ -124,31 +123,30 @@ export const ProfileHeader = () => {
                                     Logout
                                 </button>
                             </div>
-                            <div className="flex items-center justify-center">
-                                {avatar ? (
-                                    <img
-                                        className="w-24 h-24 cursor-pointer hover:brightness-75 duration-200"
-                                        src={avatar}
-                                        onClick={openModal}
-                                    />
-                                ) : (
-                                    <ReactLoading
-                                        type="spin"
-                                        className="h-24"
-                                    />
-                                )}
-                            </div>
-                            <div className="w-full flex items-center flex-col">
-                                <h3 className="text-white text-2xl font-Montserrat font-light italic capitalize">
-                                    {user!.name}
-                                </h3>
-                                <p className="text-white font-Open_Sans font-thin">
-                                    {user!.email}
-                                </p>
-                                <p className="text-white font-Open_Sans font-thin">
-                                    Treinos - {user!.exercises?.length}
-                                </p>
-                            </div>
+                            {avatar ? (
+                                <>
+                                    <div className="flex items-center justify-center">
+                                        <img
+                                            className="w-24 h-24 cursor-pointer hover:brightness-75 duration-200"
+                                            src={avatar}
+                                            onClick={openModal}
+                                        />
+                                    </div>
+                                    <div className="w-full flex items-center flex-col">
+                                        <h3 className="text-white text-2xl font-Montserrat font-light italic capitalize">
+                                            {user!.name}
+                                        </h3>
+                                        <p className="text-white font-Open_Sans font-thin">
+                                            {user!.email}
+                                        </p>
+                                        <p className="text-white font-Open_Sans font-thin">
+                                            Treinos - {user!.exercises?.length}
+                                        </p>
+                                    </div>
+                                </>
+                            ) : (
+                                <ReactLoading type="spin" className="h-24" />
+                            )}
                         </div>
                     </>
                 )}
