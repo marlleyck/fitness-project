@@ -39,12 +39,18 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
             return;
         }
 
+        if (user!.exercises?.length === 6) {
+            alert('Você atingiu a quantidade máxima de treinos!');
+            closeModal();
+            return;
+        }
+
         const exercises = inputs;
-        if (user) {
-            user.exercises = [
-                ...user.exercises!,
+        if (user!.exercises) {
+            user!.exercises = [
+                ...user!.exercises,
                 {
-                    id: user.exercises!.length + 1,
+                    id: user!.exercises.length + 1,
                     title: exerciseTitle,
                     day: exerciseDay,
                     exercises_day: exercises,

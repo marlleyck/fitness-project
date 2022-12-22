@@ -13,11 +13,11 @@ import male1 from '../../assets/img/avatars/male1.png';
 Modal.setAppElement('#root');
 
 export const ProfileHeader = () => {
-    const { token, user } = useContext(AuthContext);
+    const { token, user, isArrived } = useContext(AuthContext);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [avatars, setAvatars] = useState<AvatarJsonType>();
-    const [avatar, setAvatar] = useState(male1);
+    const [avatar, setAvatar] = useState<string | null>(null);
 
     const openModal = () => {
         setModalIsOpen(true);
@@ -37,19 +37,13 @@ export const ProfileHeader = () => {
             }
         });
 
-        /* for (let i = 0; i < avatars!.data.length; i++) {
-            if (avatars!.data[i].id == avatarID) {
-                avatarAux = avatars!.data[i].src;
-            }
-        } */
-
         setAvatar(avatarAux);
         user!.avatar = {
             id: avatarID,
             src: avatarAux,
         };
 
-        const response = await api.put(
+        await api.put(
             '/auth/user',
             {
                 user: user,
@@ -112,27 +106,31 @@ export const ProfileHeader = () => {
             </Modal>
 
             <header className="w-full h-full border-b-4 pb-4 border-solid border-black">
-                <div className="w-full h-full flex items-center justify-center flex-col p-4">
-                    <div className="flex items-center justify-center">
-                        <img
-                            className="w-24 h-24 cursor-pointer hover:brightness-75"
-                            src={avatar}
-                            alt="Male-1"
-                            onClick={openModal}
-                        />
-                    </div>
-                    <div className="w-full flex items-center flex-col">
-                        <h3 className="text-white text-2xl font-Montserrat font-light italic capitalize">
-                            {user!.name}
-                        </h3>
-                        <p className="text-white font-Open_Sans font-thin">
-                            {user!.email}
-                        </p>
-                        <p className="text-white font-Open_Sans font-thin">
-                            Treinos - {user!.exercises.length}
-                        </p>
-                    </div>
-                </div>
+                {isArrived && avatar && (
+                    <>
+                        <div className="w-full h-full flex items-center justify-center flex-col p-4">
+                            <div className="flex items-center justify-center">
+                                <img
+                                    className="w-24 h-24 cursor-pointer hover:brightness-75 duration-200"
+                                    src={avatar}
+                                    alt="Male-1"
+                                    onClick={openModal}
+                                />
+                            </div>
+                            <div className="w-full flex items-center flex-col">
+                                <h3 className="text-white text-2xl font-Montserrat font-light italic capitalize">
+                                    {user!.name}
+                                </h3>
+                                <p className="text-white font-Open_Sans font-thin">
+                                    {user!.email}
+                                </p>
+                                <p className="text-white font-Open_Sans font-thin">
+                                    Treinos - {user!.exercises!.length}
+                                </p>
+                            </div>
+                        </div>
+                    </>
+                )}
             </header>
         </div>
     );
