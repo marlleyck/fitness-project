@@ -66,6 +66,14 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
         }
     };
 
+    const handleLogoutUser = () => {
+        const responseConfirm = confirm('Deseja realmente sair?');
+        if (responseConfirm) {
+            localStorage.removeItem('@gymfit:token');
+            setAuthorized(false);
+        }
+    };
+
     const handleDeleteExercise = async (position: number) => {
         const userExercises: Exercise[] = user!.exercises!;
 
@@ -127,6 +135,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
                 setConfirmPasswordRegister,
                 handleRegisterUser,
                 handleLoginUser,
+                handleLogoutUser,
                 handleModalFillFields,
                 inputs,
                 setInputs,

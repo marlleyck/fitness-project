@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
+import { AppContext } from '../../contexts/AppContext';
 import { api } from '../../services/api';
 import axios from 'axios';
 
@@ -14,6 +15,7 @@ Modal.setAppElement('#root');
 
 export const ProfileHeader = () => {
     const { token, user, isArrived } = useContext(AuthContext);
+    const { handleLogoutUser } = useContext(AppContext);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [avatars, setAvatars] = useState<AvatarJsonType>();
@@ -66,8 +68,8 @@ export const ProfileHeader = () => {
             });
             setAvatars(response.data);
 
-            if (user?.avatar) {
-                setAvatar(`../../../${user.avatar.src}`);
+            if (user!.avatar) {
+                setAvatar(`../../../${user?.avatar.src}`);
             }
         };
         fetchAvatars();
@@ -108,12 +110,20 @@ export const ProfileHeader = () => {
             <header className="w-full h-full border-b-4 pb-4 border-solid border-black">
                 {isArrived && avatar && (
                     <>
-                        <div className="w-full h-full flex items-center justify-center flex-col p-4">
+                        <div className="w-full h-full flex items-center justify-center flex-col p-4 relative">
+                            <div className="w-36 flex items-center justify-center absolute top-0 right-0 mr-4 mt-4">
+                                <button
+                                    className="w-full p-3 rounded-xl bg-green text-white hover:brightness-75 duration-500"
+                                    type="button"
+                                    onClick={handleLogoutUser}
+                                >
+                                    Logout
+                                </button>
+                            </div>
                             <div className="flex items-center justify-center">
                                 <img
                                     className="w-24 h-24 cursor-pointer hover:brightness-75 duration-200"
                                     src={avatar}
-                                    alt="Male-1"
                                     onClick={openModal}
                                 />
                             </div>
@@ -125,7 +135,7 @@ export const ProfileHeader = () => {
                                     {user!.email}
                                 </p>
                                 <p className="text-white font-Open_Sans font-thin">
-                                    Treinos - {user!.exercises!.length}
+                                    Treinos - {user!.exercises?.length}
                                 </p>
                             </div>
                         </div>

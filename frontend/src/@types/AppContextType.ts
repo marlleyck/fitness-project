@@ -13,6 +13,7 @@ export type AppContextType = {
     setConfirmPasswordRegister: (newState: string) => void;
     handleRegisterUser: () => void;
     handleLoginUser: () => void;
+    handleLogoutUser: () => void;
     handleModalFillFields: (id: number, openModal: () => void) => void;
     inputs: string[];
     setInputs: (newState: string[]) => void;
