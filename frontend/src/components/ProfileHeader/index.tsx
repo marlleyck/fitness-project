@@ -8,6 +8,7 @@ import { AvatarJsonType } from '../../@types/AvatarJsonType';
 
 import Modal from 'react-modal';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import ReactLoading from 'react-loading';
 
 import male1 from '../../assets/img/avatars/male1.png';
 
@@ -67,9 +68,12 @@ export const ProfileHeader = () => {
                 },
             });
             setAvatars(response.data);
+            console.log(response.data);
 
             if (user!.avatar) {
-                setAvatar(`../../../${user?.avatar.src}`);
+                setAvatar(`../../../${user!.avatar.src}`);
+            } else {
+                setAvatar(male1);
             }
         };
         fetchAvatars();
@@ -121,11 +125,18 @@ export const ProfileHeader = () => {
                                 </button>
                             </div>
                             <div className="flex items-center justify-center">
-                                <img
-                                    className="w-24 h-24 cursor-pointer hover:brightness-75 duration-200"
-                                    src={avatar || male1}
-                                    onClick={openModal}
-                                />
+                                {avatar ? (
+                                    <img
+                                        className="w-24 h-24 cursor-pointer hover:brightness-75 duration-200"
+                                        src={avatar}
+                                        onClick={openModal}
+                                    />
+                                ) : (
+                                    <ReactLoading
+                                        type="spin"
+                                        className="h-24"
+                                    />
+                                )}
                             </div>
                             <div className="w-full flex items-center flex-col">
                                 <h3 className="text-white text-2xl font-Montserrat font-light italic capitalize">
