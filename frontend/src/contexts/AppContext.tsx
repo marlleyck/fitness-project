@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { api } from '../services/api';
 import { useNavigate } from 'react-router-dom';
@@ -31,6 +31,16 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
     const navigate = useNavigate();
 
     const handleRegisterUser = async () => {
+        if (
+            nameRegister === '' ||
+            emailRegister === '' ||
+            passwordRegister === '' ||
+            confirmPasswordRegister === ''
+        ) {
+            alert('Você precisa preencher todos os campos!');
+            return;
+        }
+
         const userRegister = {
             name: nameRegister,
             email: emailRegister,
@@ -49,6 +59,11 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
     };
 
     const handleLoginUser = async () => {
+        if (emailLogin === '' || passwordLogin === '') {
+            alert('Você precisa preencher todos os campos!');
+            return;
+        }
+
         const userLogin = {
             email: emailLogin,
             password: passwordLogin,
