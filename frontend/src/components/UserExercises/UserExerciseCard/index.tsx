@@ -32,14 +32,14 @@ export const UserExerciseCard = ({
                 className="w-full h-full flex items-center justify-center"
                 onClick={() => handleModalFillFields(id, openModal)}
             >
-                <h3 className="text-white font-['Montserrat']">
+                <h3 className="text-white font-['Montserrat'] ml-7">
                     {title} - {day}
                 </h3>
             </div>
             <div className="cursor-pointer ">
                 <IoMdTrash
-                    size={26}
-                    color="red"
+                    size={28}
+                    color="#A70000"
                     onClick={() => handleDeleteExercise(position)}
                 />
             </div>
