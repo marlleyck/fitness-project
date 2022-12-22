@@ -21,7 +21,12 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
 
     const { token, user, setUser } = useContext(AuthContext);
 
-    const addExerciseInput = () => {
+    const handleAddExerciseInput = () => {
+        if (inputs.length === 6) {
+            alert('Você atingiu o número máximo de exercícios!');
+            return;
+        }
+
         setInputs([...inputs, '']);
     };
 
@@ -117,7 +122,7 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
                 <BsFillPatchPlusFill
                     size={30}
                     className="cursor-pointer"
-                    onClick={addExerciseInput}
+                    onClick={handleAddExerciseInput}
                 />
                 <button
                     type="button"

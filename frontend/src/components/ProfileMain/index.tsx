@@ -31,7 +31,7 @@ export const ProfileMain = () => {
                 onRequestClose={closeModal}
                 overlayClassName="fixed top-0 left-0 right-0 bottom-0 bg-modal"
                 className="absolute left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2 
-                bg-neutral-300 w-3/5 h-96 rounded-xl outline-none"
+                bg-neutral-300 w-3/5 h-2/3 rounded-xl outline-none"
             >
                 <div className="w-full h-full flex items-center flex-col gap-2-xl">
                     <header className="w-full pr-2 pt-2 flex items-center justify-end">
