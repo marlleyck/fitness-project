@@ -74,12 +74,14 @@ export const LoginForm = () => {
                         </button>
                     </div>
 
-                    <div>
+                    <div className="w-full px-2">
                         <p className="text-white font-thin text-center">
                             Não tem uma conta ainda?{' '}
+                        </p>
+                        <p className="text-center text-white">
                             <Link
                                 to="/register"
-                                className="text-#269A90 font-normal cursor-pointer underline-none hover:underline"
+                                className="font-normal underline-none hover:underline"
                             >
                                 Cadastre-se
                             </Link>

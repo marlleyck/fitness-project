@@ -21,7 +21,7 @@ export const AppContextProvider = ({ children }: AppContextProps) => {
     const [passwordRegister, setPasswordRegister] = useState('');
     const [confirmPasswordRegister, setConfirmPasswordRegister] = useState('');
 
-    const [inputs, setInputs] = useState(['', '']);
+    const [inputs, setInputs] = useState(['', '', '', '', '']);
     const [exerciseTitle, setExerciseTitle] = useState('');
     const [exerciseDay, setExerciseDay] = useState('');
 

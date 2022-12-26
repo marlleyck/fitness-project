@@ -83,6 +83,11 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
     return (
         <form className="w-full h-full relative">
             <div className="w-full h-full flex items-center justify-start flex-col gap-4">
+                <div className="w-full">
+                    <h3 className="font-['Montserrat'] text-3xl text-center xs:text-xl">
+                        Informações
+                    </h3>
+                </div>
                 <div className="w-full flex items-center justify-center flex-col gap-4">
                     <input
                         type="text"
@@ -91,7 +96,7 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             setExerciseTitle(e.target.value)
                         }
-                        className="p-2 rounded-xl outline-none border focus:border-green duration-500"
+                        className="w-3/6 p-2 rounded-xl outline-none border focus:border-green duration-500"
                     />
                     <input
                         type="text"
@@ -100,11 +105,19 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                             setExerciseDay(e.target.value)
                         }
-                        className="p-2 rounded-xl outline-none border focus:border-green duration-500"
+                        className="w-3/6 p-2 rounded-xl outline-none border focus:border-green duration-500"
                     />
                 </div>
-                <div className="w-full flex items-center justify-center gap-4">
-                    <div className="w-full grid items-center justify-center grid-cols-2 gap-4 px-4">
+                <div className="w-full h-[260px] flex items-start justify-center flex-col gap-2">
+                    <div className="w-full">
+                        <h3 className="font-['Montserrat'] text-3xl text-center xs:text-xl">
+                            Treinos
+                        </h3>
+                    </div>
+                    <div
+                        className="w-full pl-[16px] h-[120px] grid items-center justify-center gap-2
+                        overflow-y-scroll md2:px-4"
+                    >
                         {inputs.map((item: string, index: number) => (
                             <input
                                 type="text"
@@ -114,23 +127,27 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
                                 onChange={(
                                     e: React.ChangeEvent<HTMLInputElement>,
                                 ) => handleChangeExerciseInput(e, index)}
-                                className="p-2 rounded-xl outline-none border focus:border-green duration-500"
+                                className="w-full h-[40px] px-2 rounded-xl outline-none border focus:border-green duration-500"
                             />
                         ))}
                     </div>
+                    <div className="w-full h-[30px] flex items-start justify-center mt-2">
+                        <BsFillPatchPlusFill
+                            size={30}
+                            className="cursor-pointer"
+                            onClick={handleAddExerciseInput}
+                        />
+                    </div>
                 </div>
-                <BsFillPatchPlusFill
-                    size={30}
-                    className="cursor-pointer"
-                    onClick={handleAddExerciseInput}
-                />
-                <button
-                    type="button"
-                    className="w-1/6 p-3 rounded-xl bg-green text-white hover:brightness-75 duration-500 absolute bottom-0 mb-4"
-                    onClick={handleAddExercise}
-                >
-                    Finalizar
-                </button>
+                <div className="w-full h-[64px] flex items-center justify-center">
+                    <button
+                        type="button"
+                        className="w-40 p-3 rounded-xl bg-green text-white hover:brightness-75 duration-500 xs3:w-32"
+                        onClick={handleAddExercise}
+                    >
+                        Finalizar
+                    </button>
+                </div>
             </div>
         </form>
     );

@@ -12,6 +12,7 @@ module.exports = {
                 md2: { max: '730px' },
                 xs: { max: '520px' },
                 xs2: { max: '480px' },
+                'xs-2/3': { max: '400px' },
                 xs3: { max: '370px' },
             },
             colors: {

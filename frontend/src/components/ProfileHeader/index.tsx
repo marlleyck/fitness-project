@@ -142,7 +142,7 @@ export const ProfileHeader = () => {
                                         />
                                     </div>
                                     <div className="w-full flex items-center flex-col">
-                                        <h3 className="text-white text-2xl font-Montserrat font-light italic capitalize">
+                                        <h3 className="text-white text-center text-2xl font-Montserrat font-light italic capitalize">
                                             {user!.name}
                                         </h3>
                                         <p className="text-white font-Open_Sans font-thin">

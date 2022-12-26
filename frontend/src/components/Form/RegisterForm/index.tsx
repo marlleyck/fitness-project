@@ -34,13 +34,15 @@ export const RegisterForm = () => {
                         </header>
                         <main className="w-full h-full flex items-center justify-start flex-col gap-4 mt-16">
                             {/* ----------- Name input user -------------- */}
-                            <div className="w-full flex items-center justify-center relative">
-                                <div className="absolute top-1/2 -translate-y-1/2 left-11">
+                            <div
+                                className="w-4/5 flex items-center justify-center border rounded-xl 
+                                focus-within:border-green duration-500"
+                            >
+                                <div className="ml-2">
                                     <RiUser3Fill color="#269A90" />
                                 </div>
                                 <input
-                                    className="w-4/5 bg-transparent outline-none text-white pl-6 pr-2 py-2 border 
-                            rounded-xl focus:border-green duration-500"
+                                    className="w-full bg-transparent outline-none text-white pl-2 pr-2 py-2"
                                     autoComplete="none"
                                     type="text"
                                     placeholder="Nome"
@@ -52,13 +54,15 @@ export const RegisterForm = () => {
                             </div>
 
                             {/* ----------- Email input user -------------- */}
-                            <div className="w-full flex items-center justify-center relative">
-                                <div className="absolute top-1/2 -translate-y-1/2 left-11">
+                            <div
+                                className="w-4/5 flex items-center justify-center border rounded-xl 
+                                focus-within:border-green duration-500"
+                            >
+                                <div className="ml-2">
                                     <MdEmail color="#269A90" />
                                 </div>
                                 <input
-                                    className="w-4/5 bg-transparent outline-none text-white pl-6 pr-2 py-2 border 
-                            rounded-xl focus:border-green duration-500"
+                                    className="w-full bg-transparent outline-none text-white pl-2 pr-2 py-2"
                                     autoComplete="none"
                                     type="email"
                                     placeholder="Email"
@@ -70,13 +74,15 @@ export const RegisterForm = () => {
                             </div>
 
                             {/* ----------- Password input user -------------- */}
-                            <div className="w-full flex items-center justify-center relative">
-                                <div className="absolute top-1/2 -translate-y-1/2 left-11">
+                            <div
+                                className="w-4/5 flex items-center justify-center border rounded-xl 
+                                focus-within:border-green duration-500"
+                            >
+                                <div className="ml-2">
                                     <IoMdLock color="#269A90" />
                                 </div>
                                 <input
-                                    className="w-4/5 bg-transparent outline-none text-white pl-6 pr-2 py-2 border 
-                            rounded-xl focus:border-green duration-500"
+                                    className="w-full bg-transparent outline-none text-white pl-2 pr-2 py-2"
                                     autoComplete="none"
                                     type="password"
                                     placeholder="Senha"
@@ -88,13 +94,15 @@ export const RegisterForm = () => {
                             </div>
 
                             {/* ----------- Confirm Password input user -------------- */}
-                            <div className="w-full flex items-center justify-center relative">
-                                <div className="absolute top-1/2 -translate-y-1/2 left-11">
+                            <div
+                                className="w-4/5 flex items-center justify-center border rounded-xl 
+                                focus-within:border-green duration-500"
+                            >
+                                <div className="ml-2">
                                     <IoMdLock color="#269A90" />
                                 </div>
                                 <input
-                                    className="w-4/5 bg-transparent outline-none text-white pl-6 pr-2 py-2 border 
-                            rounded-xl focus:border-green duration-500"
+                                    className="w-full bg-transparent outline-none text-white pl-2 pr-2 py-2"
                                     autoComplete="none"
                                     type="password"
                                     placeholder="Confirmar senha"
