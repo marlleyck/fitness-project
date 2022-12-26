@@ -9,7 +9,10 @@ module.exports = {
         extend: {
             screens: {
                 md: { max: '890px' },
+                md2: { max: '730px' },
                 xs: { max: '520px' },
+                xs2: { max: '480px' },
+                xs3: { max: '370px' },
             },
             colors: {
                 'black-cyan': '#1F2730',

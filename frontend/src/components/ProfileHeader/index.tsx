@@ -8,6 +8,7 @@ import { AvatarJsonType } from '../../@types/AvatarJsonType';
 
 import Modal from 'react-modal';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { FaPowerOff } from 'react-icons/fa';
 import ReactLoading from 'react-loading';
 
 import male1 from '../../assets/img/avatars/male1.png';
@@ -116,12 +117,20 @@ export const ProfileHeader = () => {
                         <div className="w-full h-full flex items-center justify-center flex-col p-4 relative">
                             <div className="w-36 flex items-center justify-center absolute top-0 right-0 mr-4 mt-4">
                                 <button
-                                    className="w-full p-3 rounded-xl bg-green text-white hover:brightness-75 duration-500"
+                                    className="w-full p-3 rounded-xl bg-green text-white hover:brightness-75 duration-500 
+                                    xs:hidden"
                                     type="button"
                                     onClick={handleLogoutUser}
                                 >
                                     Logout
                                 </button>
+                                <div className="hidden w-full xs:block xs:flex xs:items-center xs:justify-end">
+                                    <FaPowerOff
+                                        color="white"
+                                        size={26}
+                                        onClick={handleLogoutUser}
+                                    />
+                                </div>
                             </div>
                             {avatar ? (
                                 <>
