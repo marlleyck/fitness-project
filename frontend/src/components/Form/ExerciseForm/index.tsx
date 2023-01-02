@@ -3,6 +3,8 @@ import { AppContext } from '../../../contexts/AppContext';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { api } from '../../../services/api';
 
+import { Exercise, UserType } from '../../../@types/UserType';
+
 import { BsFillPatchPlusFill } from 'react-icons/bs';
 
 type ExerciseFormProps = {
@@ -74,21 +76,23 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
             },
         });
 
-        const userArray = allUsersReponse.data.users.map((usu: any) => {
-            if (usu.email === user?.email) {
+        const userArray = allUsersReponse.data.users.map((usu: UserType) => {
+            if (usu.email === user!.email) {
                 return usu;
             }
         });
 
         let exerciseId: number;
-        const exerciseArray = userArray[0].exercises.map((exercise: any) => {
-            if (exercise.title === exerciseTitle) {
-                exerciseId = exercise.id;
-                return true;
-            } else {
-                return false;
-            }
-        });
+        const exerciseArray = userArray[0].exercises.map(
+            (exercise: Exercise) => {
+                if (exercise.title === exerciseTitle) {
+                    exerciseId = exercise.id;
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+        );
 
         const exerciseAlreadyExists = exerciseArray.includes(true);
 
@@ -117,7 +121,6 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
             }
             sendUserToApi();
         }
-        console.log(user);
     };
 
     return (
