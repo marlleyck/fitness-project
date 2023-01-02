@@ -38,31 +38,7 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
         setInputs([...inputs]);
     };
 
-    const handleAddExercise = async () => {
-        if (exerciseTitle === '' || exerciseDay === '') {
-            alert('Preencha todos os campos!');
-            return;
-        }
-
-        if (user!.exercises?.length === 6) {
-            alert('Você atingiu a quantidade máxima de treinos!');
-            closeModal();
-            return;
-        }
-
-        const exercises = inputs;
-        if (user!.exercises) {
-            user!.exercises = [
-                ...user!.exercises,
-                {
-                    id: user!.exercises.length + 1,
-                    title: exerciseTitle,
-                    day: exerciseDay,
-                    exercises_day: exercises,
-                },
-            ];
-        }
-
+    const sendUserToApi = async () => {
         const response = await api.put(
             '/auth/user',
             {
@@ -78,6 +54,70 @@ export const ExerciseForm = ({ closeModal }: ExerciseFormProps) => {
         setExerciseTitle('');
         setExerciseDay('');
         closeModal();
+    };
+
+    const handleAddExercise = async () => {
+        if (exerciseTitle === '' || exerciseDay === '') {
+            alert('Preencha todos os campos!');
+            return;
+        }
+
+        if (user!.exercises?.length === 6) {
+            alert('Você atingiu a quantidade máxima de treinos!');
+            closeModal();
+            return;
+        }
+
+        const allUsersReponse = await api.get('/auth/users', {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
+        });
+
+        const userArray = allUsersReponse.data.users.map((usu: any) => {
+            if (usu.email === user?.email) {
+                return usu;
+            }
+        });
+
+        let exerciseId: number;
+        const exerciseArray = userArray[0].exercises.map((exercise: any) => {
+            if (exercise.title === exerciseTitle) {
+                exerciseId = exercise.id;
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+        const exerciseAlreadyExists = exerciseArray.includes(true);
+
+        if (exerciseAlreadyExists) {
+            const exercisesDay = inputs;
+            if (user!.exercises) {
+                user!.exercises.map(exercise => {
+                    if (exercise.id === exerciseId) {
+                        exercise.exercises_day = exercisesDay;
+                    }
+                });
+            }
+            sendUserToApi();
+        } else {
+            const exercisesDay = inputs;
+            if (user!.exercises) {
+                user!.exercises = [
+                    ...user!.exercises,
+                    {
+                        id: user!.exercises.length + 1,
+                        title: exerciseTitle,
+                        day: exerciseDay,
+                        exercises_day: exercisesDay,
+                    },
+                ];
+            }
+            sendUserToApi();
+        }
+        console.log(user);
     };
 
     return (
