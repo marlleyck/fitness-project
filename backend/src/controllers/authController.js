@@ -104,6 +104,14 @@ exports.loginUser = async (req, res) => {
     }
 }
 
+// Get Users Function
+exports.getUsers = async (req, res) => {
+    // Get users
+    const users = await User.findAll()
+
+    return res.status(200).send({ users })
+}
+
 // Get User Function
 exports.getOneUser = async (req, res) => {
     const { id } = req.tokenDecoded
